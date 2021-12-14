@@ -1,0 +1,11 @@
+type Authors @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  BlogPosts: [BlogPosts] @hasMany(indexName: "byAuthors", fields: ["id"])
+}
+
+type BlogPosts @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  post: String
+  authorsID: ID @index(name: "byAuthors")
+}
